@@ -35,7 +35,7 @@ class AWT_TESTIMONIAL_WIDGET extends WP_Widget {
             extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
             $posts = awt_get_testimonials(array(
-                'count' => 1, // $no
+                'count' => $no,
                 'order' => $instance['order'],
             ));    
             $awt_template = new stdClass();
@@ -102,11 +102,11 @@ class AWT_TESTIMONIAL_WIDGET extends WP_Widget {
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" 
                        name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
             </p>
-            <!--<p>
+            <p>
                 <label for="<?php echo $this->get_field_id( 'no' ); ?>"><?php echo __( 'Number of Testimonial','awt'); ?></label> 
                 <input class="small-text" id="<?php echo $this->get_field_id( 'no' ); ?>" 
                        name="<?php echo $this->get_field_name( 'no' ); ?>" type="text" value="<?php echo esc_attr( $no ); ?>" />
-            </p>-->
+            </p>
             <p>
                 <label for="<?php echo $this->get_field_id( 'order' ); ?>"><?php echo __( 'Order','awt'); ?></label> 
                 <select

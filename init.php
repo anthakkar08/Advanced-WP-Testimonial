@@ -15,6 +15,7 @@ class AWT_CORE{
     function __construct() {
         
         include_once 'api/functions.php';
+        include_once 'api/template.php';
         include_once 'html/settings_screen.php';
         include_once 'html/client_meta_box.php';
         include_once 'widgets/testimonial_widget.php';

@@ -1,9 +1,13 @@
 <?PHP
 global $awt_template;
 
-echo $awt_template->before_widget;
-if(!empty($awt_template->title))
-    echo $awt_template->before_title . $awt_template->title . $awt_template->after_title; ?>
+awt_before_widget();
+if(awt_has_widget_title()){
+    awt_before_title();
+    awt_title();
+    awt_after_title();
+}
+?>
 <style type="text/css">
     .awt_read_more {
         float:right;
@@ -15,7 +19,7 @@ if(!empty($awt_template->title))
 </style>
 <div>
     <?PHP
-    foreach($awt_template->posts as $value){
+    foreach(awt_widget_posts() as $value){
         ?>
         <h2 class="entry-title"> <?PHP echo apply_filters('the_title'   ,$value->post_title); ?></h2>
         <div><?PHP echo apply_filters('the_content' ,wp_trim_words($value->post_content,get_option('awt_short_desc_length',55))); ?>
@@ -50,7 +54,7 @@ if(!empty($awt_template->title))
     ?>
 </div>    
 <?PHP 
-echo $awt_template->after_widget;
+awt_after_widget();
 
 
     

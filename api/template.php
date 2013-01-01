@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Get the Text Before the Widget Title
+ * @version 1.1
+ */
 function awt_before_title(){
     global $awt_template;
     

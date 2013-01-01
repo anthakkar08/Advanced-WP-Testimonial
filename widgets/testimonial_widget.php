@@ -33,7 +33,8 @@ class AWT_TESTIMONIAL_WIDGET extends WP_Widget {
             }
             
             extract( $args );
-		$title = apply_filters( 'widget_title', $instance['title'] );
+            $title = apply_filters( 'widget_title', $instance['title'] );
+            $no    = $instance['no'];
             $posts = awt_get_testimonials(array(
                 'count' => $no,
                 'order' => $instance['order'],

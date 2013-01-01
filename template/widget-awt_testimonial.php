@@ -1,12 +1,10 @@
 <?PHP
-global $awt_template;
 
-awt_before_widget();
-if(awt_has_widget_title()){
-    awt_before_title();
-    awt_title();
-    awt_after_title();
-}
+awt_the_before_widget();
+
+if(awt_has_widget_title())
+    awt_the_widget_title();
+
 ?>
 <style type="text/css">
     .awt_read_more {
@@ -21,8 +19,8 @@ if(awt_has_widget_title()){
     <?PHP
     foreach(awt_widget_posts() as $value){
         ?>
-        <h2 class="entry-title"> <?PHP echo apply_filters('the_title'   ,$value->post_title); ?></h2>
-        <div><?PHP echo apply_filters('the_content' ,wp_trim_words($value->post_content,get_option('awt_short_desc_length',55))); ?>
+        <h2 class="entry-title"><?PHP awt_the_title($value); ?></h2>
+        <div><?PHP awt_the_excerpt($value); ?>
             <a class="awt_read_more" href="<?PHP echo get_permalink($value->ID); ?>"><?PHP echo get_option('awt_link_text',__('Read More','awt')); ?></a>
             <?PHP
             $img_src    = wp_get_attachment_image_src( get_post_thumbnail_id($value->ID),array(32,32));
@@ -54,7 +52,7 @@ if(awt_has_widget_title()){
     ?>
 </div>    
 <?PHP 
-awt_after_widget();
+awt_the_after_widget();
 
 
     

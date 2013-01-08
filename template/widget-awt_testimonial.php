@@ -23,16 +23,19 @@ if(awt_has_widget_title())
         <div><?PHP awt_the_excerpt($value); ?>
             <a class="awt_read_more" href="<?PHP echo get_permalink($value->ID); ?>"><?PHP echo get_option('awt_link_text',__('Read More','awt')); ?></a>
             <?PHP
-            $img_src    = wp_get_attachment_image_src( get_post_thumbnail_id($value->ID),array(32,32));
-            $client     = get_post_meta($value->ID,'awt_client_name'    ,TRUE);
-            $client_url = get_post_meta($value->ID,'awt_client_siteurl' ,TRUE);
-            if(is_array($img_src)){
+            if(awt_has_client_img($value)){
                 ?>
                 <div class="awt_client_thumb">
-                    <img src="<?PHP echo $img_src[0]; ?>"  /><br/>
+                    <?PHP awt_the_client_img($value); ?><br/>
                 </div>
                 <?PHP
             }
+            if(awt_has_client_name()){
+                awt_the_client_name();
+            }
+            $img_src    = wp_get_attachment_image_src( get_post_thumbnail_id($value->ID),array(32,32));
+            $client     = get_post_meta($value->ID,'awt_client_name'    ,TRUE);
+            $client_url = get_post_meta($value->ID,'awt_client_siteurl' ,TRUE);
             if(!empty($client)){
                 ?>
                 <span class="sep"><?PHP echo __('By','awt'); ?></span>

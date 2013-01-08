@@ -182,5 +182,90 @@ function awt_the_excerpt($post_obj = NULL,$args = array()){
 }
 
 function awt_get_client_img($post_obj = NULL){
+    global $post;
     
+    if(is_null($post_obj)){
+        $post_obj = $post;
+    }
+    
+    $img = wp_get_attachment_image_src( get_post_thumbnail_id($post_obj->ID),array(32,32));
+    
+    return (is_array($img)?$img[0]:NULL);
+}
+
+function awt_has_client_img($post_obj = NULL){
+    
+    return (is_null(awt_get_client_img($post_obj))?FALSE:TRUE);
+}
+
+function awt_the_client_img($post_obj){
+
+    if(awt_has_client_img($post_obj)){
+        echo '<img src="' . awt_get_client_img($post_obj) .'" class="awt_client_thumbnil" />' ;
+    }
+    
+}
+
+function awt_get_client_name($post_obj = NULL){
+    global $post;
+    
+    if(is_null($post_obj)){
+        $post_obj = $post;
+    }
+    
+    return get_post_meta($post_obj->ID,'awt_client_name'       ,TRUE);
+}
+/**
+ * 
+ * @param type $post_obj
+ * @return type
+ */
+function awt_has_client_name($post_obj = NULL){
+    
+    return (is_null(awt_get_client_name($post_obj))?TRUE:FALSE);
+}
+
+/**
+ * 
+ * @global type $post
+ * @param type $post_obj
+ */
+function awt_the_client_name($post_obj = NULL){
+    global $post;
+    
+    if(is_null($post_obj)){
+        $post_obj = $post;
+    }
+    
+    echo '<div><span class="awt_client_label">' . __('By','awt') . '</span>';
+    if(awt_has_client_site()){
+        echo  '<a href="'. awt_get_client_site($post_obj) . '" target="_blank">' . awt_get_client_name() .  '</a>';
+    }else{
+        echo awt_get_client_name();
+    }
+    echo '</div>';
+}
+/**
+ * 
+ * @global type $post
+ * @param type $post_obj
+ * @return type
+ */
+function awt_get_client_site($post_obj = NULL ){
+    global $post;
+    
+    if(is_null($post_obj)){
+        $post_obj = $post;
+    }
+    
+    return get_post_meta($post_obj->ID,'awt_client_siteurl'    ,TRUE);
+}
+/**
+ * 
+ * @param type $post_obj
+ * @return type
+ */
+function awt_has_client_site($post_obj = NULL){
+    
+    return (is_null(awt_get_client_site($post_obj))?TRUE:FALSE);
 }
